@@ -10,6 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FullScreenLoader from './common/Loaders/FullScreenLoader';
 
 const Home = lazy(() => import('./modules/Home'));
+const Homepage = lazy(() => import('./modules/Homepage/Homepage'));
 
 axios.defaults.baseURL = 'http://localhost:5500';
 
@@ -61,6 +62,7 @@ function App() {
       <CssBaseline />
       <Suspense fallback={<FullScreenLoader />}>
         <Switch>
+          <Route path='/dashboard' component={Homepage} />
           <Route path='/' component={Home} />
         </Switch>
       </Suspense>
