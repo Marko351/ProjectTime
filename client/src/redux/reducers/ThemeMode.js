@@ -1,7 +1,7 @@
 import { CHANGE_THEME_MODE } from '../types';
 
 const initialState = {
-  mode: 'light-mode',
+  mode: 'dark-mode',
 };
 
 const ThemeModeReducer = (state = initialState, action) => {

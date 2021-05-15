@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
   Paper,
   Typography,
   Button,
-  Select,
-  FormControl,
-  FormHelperText,
-  MenuItem,
   List,
   ListItem,
   ListItemIcon,
@@ -19,7 +14,7 @@ import {
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
 import EditorAndDashboard from '../../assets/editor-and-dashboard-b.png';
-import { changeThemeMode } from '../../redux/actions/ThemeMode';
+import ThemeChanger from '../../common/ThemeChanger';
 
 const useStyles = makeStyles((theme) => {
   const root = {
@@ -50,13 +45,6 @@ const useStyles = makeStyles((theme) => {
       alignItems: 'center',
       [theme.breakpoints.down('sm')]: {
         padding: '1rem',
-      },
-    },
-    formControl: {
-      minWidth: '10rem',
-      marginRight: theme.spacing(4),
-      [theme.breakpoints.down('xs')]: {
-        marginRight: 0,
       },
     },
     buttons: {
@@ -121,13 +109,7 @@ const useStyles = makeStyles((theme) => {
 const Home = ({}) => {
   const classes = useStyles();
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const { mode } = useSelector((state) => state.ThemeMode);
   const smUp = useMediaQuery(theme.breakpoints.up('sm'));
-
-  const onChangeTheme = (e) => {
-    dispatch(changeThemeMode(e.target.value));
-  };
 
   const onLoginClick = async () => {
     window.open(
@@ -144,18 +126,7 @@ const Home = ({}) => {
             ProjectTime
           </Typography>
           <div className={classes.buttons}>
-            <FormControl className={classes.formControl}>
-              <Select
-                value={mode}
-                onChange={onChangeTheme}
-                // className={classes.selectEmpty}
-                inputProps={{ 'aria-label': 'Without label' }}
-              >
-                <MenuItem value={'light-mode'}>Light Mode</MenuItem>
-                <MenuItem value={'dark-mode'}>Dark Mode</MenuItem>
-              </Select>
-              <FormHelperText>Select Mode</FormHelperText>
-            </FormControl>
+            <ThemeChanger />
             {smUp && (
               <Button
                 variant='contained'
