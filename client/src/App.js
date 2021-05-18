@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import FullScreenLoader from './common/Loaders/FullScreenLoader';
+import Login from './modules/Login/Login';
 
 const Home = lazy(() => import('./modules/Home'));
 const Homepage = lazy(() => import('./modules/layout/Homepage'));
@@ -89,6 +89,7 @@ function App() {
       <Suspense fallback={<FullScreenLoader />}>
         <Switch>
           <Route path='/dashboard' component={Homepage} />
+          <Route path='/login' component={Login} />
           <Route path='/' component={Home} />
         </Switch>
       </Suspense>
