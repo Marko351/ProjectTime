@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
@@ -14,17 +15,21 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const Login = (props) => {
+const Login = () => {
   const history = useHistory();
   const styles = useStyles();
 
   useEffect(() => {
-    const params = new URLSearchParams(history.location.search);
-    const code = params.get('code');
-    if (!code) history.push('/');
-    else {
-    }
-    console.log(code);
+    const loadData = async () => {
+      const params = new URLSearchParams(history.location.search);
+      const code = params.get('code');
+      if (!code) history.push('/');
+      else {
+        const response = await axios.post('/authentication/login', { code });
+        console.log('RESPONSE', response);
+      }
+    };
+    loadData();
   }, []);
 
   return (

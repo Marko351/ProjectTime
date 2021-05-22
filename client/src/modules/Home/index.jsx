@@ -111,9 +111,10 @@ const Home = ({}) => {
   const theme = useTheme();
   const smUp = useMediaQuery(theme.breakpoints.up('sm'));
 
+  console.log(process.env);
   const onLoginClick = async () => {
     window.open(
-      `https://wakatime.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&scope=email,read_stats&response_type=code&redirect_uri=http://localhost:3000/login`,
+      `https://wakatime.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&scope=email,read_stats,read_logged_time,write_logged_time,read_orgs,read_private_leaderboards,write_private_leaderboards&response_type=code&redirect_uri=http://localhost:3000/login`,
       '_self'
     );
   };
@@ -132,6 +133,7 @@ const Home = ({}) => {
                 variant='contained'
                 color='primary'
                 className={classes.navbarButton}
+                onClick={onLoginClick}
               >
                 Login
               </Button>
