@@ -1,7 +1,7 @@
 import { SET_CURRENT_USER } from '../types';
 
 const initialState = {
-  isAuth: false,
+  isAuth: true,
   user: {},
 };
 

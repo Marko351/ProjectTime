@@ -100,7 +100,7 @@ function Navigator(props) {
                 className={clsx(classes.item, active && classes.itemActiveItem)}
               >
                 <NavLink
-                  to={route}
+                  to={`/project-time/${route}`}
                   className={classes.navLink}
                   activeClassName={classes.activeNavLink}
                 >

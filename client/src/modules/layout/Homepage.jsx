@@ -1,25 +1,22 @@
 import React, { useEffect } from 'react';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
 import Navigator from './Navigator';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 
 // import Content from './Content';
-import Header from './Layout';
+import Header from './Header';
+import routes from './routes';
 
 function Copyright() {
   return (
     <Typography variant='body2' align='center'>
-      {'Copyright © '}
-      <Link color='inherit' href='https://material-ui.com/'>
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
+      Powerd by Marko351 {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
@@ -63,7 +60,8 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function Layout(props) {
+function Homepage(props) {
+  const match = useRouteMatch();
   const classes = useStyles();
   const themeProvider = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -101,7 +99,19 @@ function Layout(props) {
       <div className={classes.app}>
         <Header onDrawerToggle={handleDrawerToggle} />
         <Paper elevation={0} square className={classes.main}>
-          Test 123
+          <Switch>
+            {routes.map((route) => {
+              // console.log(route);
+              return (
+                <Route
+                  key={route.name}
+                  path={`${match.path}/${route.path}`}
+                  name={route.name}
+                  render={(props) => <route.component {...props} />}
+                />
+              );
+            })}
+          </Switch>
         </Paper>
         <Divider />
         <footer className={classes.footer}>
@@ -113,4 +123,4 @@ function Layout(props) {
   );
 }
 
-export default Layout;
+export default Homepage;

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
-function PrivateRoute({ component: Component, auth, ...rest }) {
+function PrivateRoute({ component: Component, ...rest }) {
   const { isAuth } = useSelector((state) => state.Authentication);
   let currentLocation = rest.location.pathname + rest.location.search;
 
@@ -33,9 +32,5 @@ function PrivateRoute({ component: Component, auth, ...rest }) {
     );
   }
 }
-
-PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
 
 export default PrivateRoute;

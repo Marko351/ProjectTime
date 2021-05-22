@@ -1,20 +1,20 @@
 import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import axiosConfig from './config/axiosConfig';
+import PrivateRoute from './common/PrivateRoute';
 import FullScreenLoader from './common/Loaders/FullScreenLoader';
 import Login from './modules/Login/Login';
 
 const Home = lazy(() => import('./modules/Home'));
 const Homepage = lazy(() => import('./modules/layout/Homepage'));
 
-axios.defaults.baseURL = 'http://localhost:5500';
-
 function App() {
+  axiosConfig();
   const { mode } = useSelector((state) => {
     return {
       mode: state.ThemeMode.mode === 'light-mode' ? 'light' : 'dark',
@@ -88,7 +88,7 @@ function App() {
       <CssBaseline />
       <Suspense fallback={<FullScreenLoader />}>
         <Switch>
-          <Route path='/dashboard' component={Homepage} />
+          <PrivateRoute path='/project-time' component={Homepage} />
           <Route path='/login' component={Login} />
           <Route path='/' component={Home} />
         </Switch>
